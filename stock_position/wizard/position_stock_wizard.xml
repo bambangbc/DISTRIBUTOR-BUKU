@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_position_stock_wizard" model="ir.ui.view">
+            <field name="name">position.stock.wizard</field>
+            <field name="model">position.stock.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Stock Report Parameters">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_start" />
+                                <field name="date_end" />
+                            </group>
+                            <group >
+                                <field name="warehouse_id" options="{'no_create': True}"/>
+                            </group>    
+                        </group>   
+                    </sheet>
+                    <footer>
+                    	<button name="compute_position_stock" string="Execute" type="object" class="btn-primary oe_inline" icon="gtk-apply"/>
+                        <button icon="gtk-cancel" special="cancel" string="Cancel" class="oe_inline"/>                      
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_position_stock_wizard">
+            <field name="name">Report Stock</field>
+            <field name="res_model">position.stock.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+         
+            
+        <menuitem action="show_position_stock_wizard" 
+            name="Stock Report" 
+            id="menu_sales_report_form_action" 
+            parent="sales_report.menu_sales_report_form"
+            sequence="20"/> 
+
+
+    </data>
+</openerp>   

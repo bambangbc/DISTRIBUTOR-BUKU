@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="ldonesm_view" model="ir.ui.view">
+            <field name="name">stock.move.confirm.wizard</field>
+            <field name="model">stock.move.confirm</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Draft PO">
+                    <footer>
+                        <button string="Done SM" name="compute" type="object" default_focus="1" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="donesm_action"
+            name="done All SM(s)"
+            src_model="stock.move"
+            res_model="stock.move.confirm"
+            view_type="tree" view_mode="form"
+            target="new"
+            key2="client_action_multi"/>
+
+    </data>
+</openerp>

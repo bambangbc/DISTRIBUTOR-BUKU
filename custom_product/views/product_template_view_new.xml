@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="product_template_form_publication_new">
+            <field name="name">product.template.view.new</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Publication Details">
+                        <group>
+                        <field name="id_product" />     
+                        <field name="isbn_number" />     
+                        <field name="author" />     
+                        <field name="publisher" />     
+                        <field name="date_of_publish" />     
+                     
+                        </group>                                           
+                    </page>       
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,158 @@
+ <openerp>
+    <data>   
+
+        <record id="konsinyasi_view_sales_order_filter" model="ir.ui.view">
+            <field name="name">sale.order.list.select</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                    <field name="user_id" position="after">
+                        <field name="areahead_id"/>
+                    </field>    
+
+                    <filter string="Salesperson" position="before">
+                        <filter string="Type Penjualan" domain="[('type_penjualan','=',True)]" context="{'group_by':'type_penjualan'}"/>
+                        <filter string="Konsinyasi" domain="[('is_konsinyasi','=',True)]" context="{}"/>
+                        <filter string="Non Konsinyasi" domain="[('is_konsinyasi','=',False)]" context="{}"/>
+                        <filter string="Area Head" domain="[]" context="{'group_by':'areahead_id'}"/>
+                    </filter>
+            </field>
+        </record>
+
+        <record id="konsinyasi_view_quotation_tree" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Quotation" fonts="bold:message_unread==True" colors="grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except')">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name" string="Quotation Number"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="areahead_id"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="is_konsinyasi" invisible="1"/>
+                    <field name="type_penjualan" invisible="1"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <field name="state"/> 
+                </tree>    
+            </field>
+        </record>
+
+        <record id="vit_showroom_view_quotation_tree" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Quotation" fonts="bold:message_unread==True" colors="grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except')">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name" string="Quotation Number"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="areahead_id"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="is_konsinyasi" invisible="1"/>
+                    <field name="type_penjualan" invisible="1"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <field name="state"/> 
+                </tree>    
+            </field>
+        </record>
+
+        <record id="action_konsinyasi" model="ir.actions.act_window">
+            <field name="name">Penjualan Konsinyasi</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="view_id" ref="konsinyasi.konsinyasi_view_quotation_tree"/>  
+            <field name="context">{'search_default_my_sale_orders_filter': 1,'default_is_konsinyasi':True,'default_type_penjualan':'konsinyasi'}</field>
+            <field name="domain">[('state','in',('draft','sent','cancel')),('is_konsinyasi','=',True),('type_penjualan','=','konsinyasi')]</field>      
+               
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Belum ada daftar konsinyasi
+              </p>              
+                <p>........!</p>
+            </field>
+        </record>
+
+        <record id="action_showroom" model="ir.actions.act_window">
+            <field name="name">Penjualan Kredit</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="view_id" ref="konsinyasi.konsinyasi_view_quotation_tree"/>  
+            <field name="context">{'search_default_my_sale_orders_filter': 1,'default_is_konsinyasi':False,'default_type_penjualan':'showroom'}</field>
+            <field name="domain">[('state','in',('draft','sent','cancel')),('is_konsinyasi','=',False),('type_penjualan','=','showroom')]</field>     
+                       
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Belum ada daftar Penjualan Kredit
+              </p>              
+                <p>........!</p>
+            </field>
+        </record>
+
+        <menuitem id="konsinyasi_menu"
+             action="action_konsinyasi"
+             name="Penjualan Konsinyasi"
+             sequence="4"
+             parent="base.menu_sales"/>
+
+        <menuitem id="penj_showroom_menu"
+             action="action_showroom"
+             name="Penjualan Kredit"
+             sequence="5"
+             parent="base.menu_sales"/>
+
+        <!-- Tambah field is_konsinyasi agar konsinyasi tidak muncul -->     
+        <record id="konsinyasi_view_quotation_tree2" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                    <field name="partner_id" position="after">
+                        <field name="is_konsinyasi" invisible="1"/>
+                        <field name="type_penjualan" invisible="1"/>
+                    </field>    
+            </field>
+        </record>
+
+        <record id="konsinyasi_view_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                    <field name="partner_id" position="after">
+                        <field name="areahead_id"/>
+                        <field name="is_konsinyasi" invisible="1"/>
+                        <field name="type_penjualan" invisible="1"/>
+                    </field>    
+            </field>
+        </record>
+
+
+            <!-- Modifikasi  Quotations-->
+        <record id="action_quotations2" model="ir.actions.act_window">
+            <field name="name">Penjualan Tunai</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{'search_default_my_sale_orders_filter': 1}</field>
+            <field name="domain">[('state','in',('draft','sent','cancel')),('is_konsinyasi','=',False),('type_penjualan','=','putus')]</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Belum ada daftar Penjualan Tunai
+              </p><p>
+                ........!
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="sale.menu_sale_quotations"
+                action="action_quotations2" parent="base.menu_sales"
+                sequence="5"/>            
+
+    </data>
+</openerp>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- filter -->
+        <record id="view_position_stock_filter" model="ir.ui.view">
+            <field name="name">position.stock.select</field>
+            <field name="model">position.stock</field>
+            <field name="arch" type="xml">
+                <search string="Search report by">
+                    <field name="kode_buku"/>
+                    <group expand="1" string="Group By...">
+
+                        <filter string="Customer" name="customer"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'customer'}"/> 
+
+                        <filter string="Warehouse" name="warehouse"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'warehouse'}"/>
+
+                        <filter string="Kode Buku" name="kode_buku"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'kode_buku'}"/>                       
+
+                    </group>                                     
+                </search>
+            </field>
+        </record>
+
+        <record id="view_position_stock_tree" model="ir.ui.view">
+            <field name="name">position.stock.tree</field>
+            <field name="model">position.stock</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Report" create="false" delete="false">
+                    <field name="customer" invisible="1"/>
+                    <field name="warehouse" invisible="1"/>
+                    <field name="kode_buku"/>
+                    <field name="judul"/>
+                    <field name="harga_satuan"/>
+                    <field name="awal" sum="Total"/>
+                    <field name="jual" sum="Total"/>
+                    <field name="retur" sum="Total"/> 
+                    <field name="akhir" sum="Total"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>  

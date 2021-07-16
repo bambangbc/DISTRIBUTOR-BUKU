@@ -1,0 +1,57 @@
+ <openerp>
+    <data>   
+
+        <record id="stock_picking_invoice" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="before">  
+                    <field name="invoice_id" attrs="{'invisible':[('invoice_id','=',False)]}"/>
+                    <field name="so_id" attrs="{'invisible':[('so_id','=',False)]}"/>
+                    <field name="manager"/>
+                </field>
+                <field name="note" position="replace">
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="stok_picking_total">
+                        <field name="gross" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="disc" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="nett" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                    <div class="oe_clear"/>
+                    <field name="note" class="oe_inline" placeholder="Terms and conditions..."/>
+                </field>                                  
+            </field>
+        </record> 
+
+        <record id="view_move_picking_tree_print" model="ir.ui.view">
+            <field name="name">stock.move.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml"> 
+
+                <field name="state" position="before" >
+                    <field name="price"/>
+                    <field name="discount"/>
+                    <field name="gross" invisible="1"/>
+                    <field name="disc" invisible="1"/>
+                    <field name="nett"/>
+                </field>
+                                
+            </field>
+        </record>
+
+        <record id="view_manager_sales_form" model="ir.ui.view">
+            <field name="name">res.partner.manager.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page string="Sales &amp; Purchases" position="inside">
+                    <group>
+                        <field name="manager"/>
+                    </group>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</openerp>    

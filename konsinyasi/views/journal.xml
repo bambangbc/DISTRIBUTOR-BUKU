@@ -1,0 +1,19 @@
+ <openerp>
+    <data>   
+
+<!-- Journal -->
+        <record id="journal_type_penjualan_view" model="ir.ui.view">
+            <field name="name">account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">      
+
+                <xpath expr="//field[@name='group_invoice_lines']" position="after">
+                    <field name="type_penjualan" attrs="{'invisible':[('type','not in',('sale','sale_refund'))]}"/>
+                </xpath>              
+                                   
+            </field>
+        </record> 
+
+    </data>
+</openerp>   

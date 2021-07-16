@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!--sequance-->
+        <record forcecreate="1" id="seq_type_sales_order_konsinyasi" model="ir.sequence.type">
+            <field name="name">Sales Order Konsinyasi</field>
+            <field name="code">sale.order.konsinyasi</field>
+        </record>
+        
+        <!-- Sequences for sales.order.konsinyasi --> 
+        <record id="seq_sales_order_konsinyasi" model="ir.sequence">
+            <field name="name">Sales Order Konsinyasi</field>
+            <field name="code">sale.order.konsinyasi</field>
+            <field name="prefix">KONSI</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!--sequance-->
+        <record forcecreate="1" id="seq_type_sales_order_kredit" model="ir.sequence.type">
+            <field name="name">Sales Order Kredit</field>
+            <field name="code">sale.order.credit</field>
+        </record>
+        
+        <!-- Sequences for sales.order.kredit --> 
+        <record id="seq_sales_order_kredit" model="ir.sequence">
+            <field name="name">Sales Order Kredit</field>
+            <field name="code">sale.order.credit</field>
+            <field name="prefix">CRED</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_sales_report_wizard" model="ir.ui.view">
+            <field name="name">sales.report.wizard</field>
+            <field name="model">sales.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sales Report Parameters">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_start" />
+                                
+                            </group>
+                            <group >
+                                <field name="date_end" />
+                            </group>    
+                        </group>   
+                    </sheet>
+                    <footer>
+                    	<button name="compute_report_sales" string="Execute" type="object" class="btn-primary oe_inline" icon="gtk-apply"/>
+                        <button icon="gtk-cancel" special="cancel" string="Cancel" class="oe_inline"/>                      
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="view_stock_report_wizard" model="ir.ui.view">
+            <field name="name">stock.report.wizard</field>
+            <field name="model">stock.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Stock Report Parameters">
+                     <sheet>
+                        <group>
+                            <group>
+                                <field name="date_start" />
+                                
+                            </group>
+                            <group >
+                                <field name="date_end" />
+                            </group>    
+                        </group>   
+                    </sheet>
+                    <footer>
+                        <button name="fill_table_so" string="Execute so" type="object" class="btn-primary oe_inline" icon="gtk-apply"/>
+                        <!--button name="fill_table_so2" string="Execute so 2" type="object" class="btn-primary oe_inline" icon="gtk-apply"/>
+                        <button name="fill_table_masuk" string="Execute masuk" type="object" class="btn-primary oe_inline" icon="gtk-apply"/> 
+                        <button name="fill_table_keluar" string="Execute keluar" type="object" class="btn-primary oe_inline" icon="gtk-apply"/-->  
+                        <button name="fill_table_change" string="Execute change stock" type="object" class="btn-primary oe_inline" icon="gtk-apply"/>                  
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_sales_report_wizard">
+            <field name="name">Report Sales</field>
+            <field name="res_model">sales.report.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_stock_report_wizard">
+            <field name="name">Report stock</field>
+            <field name="res_model">stock.report.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        
+        <menuitem
+            name="Analisys" 
+            id="menu_sales_report_form" 
+            parent="base.menu_sales"
+            sequence="60"/> 
+            
+        <menuitem action="show_sales_report_wizard" 
+            name="Sales Report" 
+            id="menu_sales_report_form_action" 
+            parent="menu_sales_report_form"
+            sequence="10"/> 
+
+        <menuitem action="show_stock_report_wizard" 
+            name="Cek Stock" 
+            id="cek_stock" 
+            parent="menu_sales_report_form"
+            sequence="10"/> 
+
+    </data>
+</openerp>   

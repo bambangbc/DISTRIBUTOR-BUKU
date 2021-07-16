@@ -1,0 +1,28 @@
+ <openerp>
+    <data>   
+
+<!-- Sales -->
+
+        <record id="konsinyasi_view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml"> 
+                <xpath expr="//field[@name='currency_id']" position="after"> 
+                    <field name="areahead_id" attrs="{'invisible':[('is_konsinyasi','=',False)]}"/>
+                    <!-- <field name="spg_id" attrs="{'invisible':[('is_konsinyasi','=',False)],'required':[('is_konsinyasi','=',True)]}"/> -->
+                    <field name="is_konsinyasi" invisible="1"/>
+                </xpath>              
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after"> 
+                    <field name="bon_date" required="1"/>
+                    <field name="bon_number" required="1"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="attributes"> 
+                    <attribute name="string">UoM</attribute>
+                </xpath>
+                                 
+            </field>
+        </record>    
+
+    </data>
+</openerp>   

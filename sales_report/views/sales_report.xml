@@ -1,0 +1,379 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- filter -->
+        <record id="view_sales_report_filter" model="ir.ui.view">
+            <field name="name">sales.report.select</field>
+            <field name="model">sales.report</field>
+            <field name="arch" type="xml">
+                <search string="Search report by">
+                    <field name="no_inv"/>
+                    <field name="customer"/>
+                    <field name="kode_buku"/>
+                    <group expand="1" string="Group By...">
+    
+                        <filter string="Type Penjualan" name="type_jual"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'type_jual'}"/>
+
+                        <filter string="Customer" name="customer"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'customer'}"/> 
+
+                        <filter string="Kode Buku" name="kode_buku"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'kode_buku'}"/>    
+                                                 
+                        <filter string="No Invoice" name="no_inv"
+                                 icon="terp-personal" domain="[]"
+                                 context="{'group_by':'no_inv'}"/> 
+
+                        <filter string="Tanggal Invoice" name="tgl_inv"
+                                 icon="terp-personal" domain="[]"
+                                 context="{'group_by':'tgl_inv'}"/> 
+
+                    </group>                                     
+                </search>
+            </field>
+        </record>
+
+        <record id="view_sales_report_tree" model="ir.ui.view">
+            <field name="name">sales.report.tree</field>
+            <field name="model">sales.report</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sales Report" create="false" delete="false">
+                    <field name="no_inv"/>
+                    <field name="tgl_inv"/>
+                    <field name="customer"/>
+                    <field name="kode_buku"/>
+                    <field name="judul"/>
+                    <field name="harga_satuan"/>
+                    <field name="qty" sum="Total"/>
+                    <field name="bruto" sum="Total"/>
+                    <field name="disc"/>
+                    <field name="disc_nominal" sum="Total"/> 
+                    <field name="nett" sum="Total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_report_filter" model="ir.ui.view">
+            <field name="name">stock.report</field>
+            <field name="model">stock.report</field>
+            <field name="arch" type="xml">
+                <search string="Search report by">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <group expand="1" string="Group By...">
+    
+                        <filter string="Product" name="product"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'product'}"/>
+
+                        <filter string="Customer" name="location"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'location'}"/> 
+
+                    </group>                                     
+                </search>
+            </field>
+        </record>
+
+        <record id="view_stock_report_tree" model="ir.ui.view">
+            <field name="name">stock.report.tree</field>
+            <field name="model">stock.report</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Report" create="false" delete="false">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="laporan_stok_tree">
+            <field name="name">laporan rekap absen Perdivisi</field>
+            <field name="model">stock.report</field>
+            <field name="type">tree</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Laporan Rekap Absen Perdivisi" create="false">
+                    <field name="location"/>
+                    <field name="product"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>  
+
+        <record id="stock" model="ir.actions.act_window">
+            <field name="name">Rekap Absen Perdivisi</field>
+            <field name="res_model">stock.report</field>
+            <field name="view_type">form</field>
+            <field name="domain"></field>
+            <field name="view_mode">tree</field>
+        </record> 
+
+        <menuitem action="stock" 
+            name="view so" 
+            id="cek_stock1" 
+            parent="menu_sales_report_form"
+            sequence="10"/> 
+
+        <record id="view_stock2_report_filter" model="ir.ui.view">
+            <field name="name">stock.report</field>
+            <field name="model">stock.report2</field>
+            <field name="arch" type="xml">
+                <search string="Search report by">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <group expand="1" string="Group By...">
+    
+                        <filter string="Product" name="product"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'product'}"/>
+
+                        <filter string="Customer" name="location"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'location'}"/> 
+
+                    </group>                                     
+                </search>
+            </field>
+        </record>
+
+        <record id="view_stock_repor2t2_tree" model="ir.ui.view">
+            <field name="name">stock.report.tree</field>
+            <field name="model">stock.report2</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Report" create="false" delete="false">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="laporan_stok2_tree">
+            <field name="name">laporan rekap absen Perdivisi</field>
+            <field name="model">stock.report2</field>
+            <field name="type">tree</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Laporan Rekap Absen Perdivisi" create="false">
+                    <field name="location"/>
+                    <field name="product"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>  
+
+        <record id="stock2" model="ir.actions.act_window">
+            <field name="name">Rekap Absen Perdivisi</field>
+            <field name="res_model">stock.report2</field>
+            <field name="view_type">form</field>
+            <field name="domain"></field>
+            <field name="view_mode">tree</field>
+        </record> 
+
+        <!--menuitem action="stock2" 
+            name="view so 2" 
+            id="cek_stock_2" 
+            parent="menu_sales_report_form"
+            sequence="10"/--> 
+
+        <record id="view_stock_lost_report_filter" model="ir.ui.view">
+            <field name="name">stock.report.masuk</field>
+            <field name="model">stock.report.masuk</field>
+            <field name="arch" type="xml">
+                <search string="Search report by">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <group expand="1" string="Group By...">
+    
+                        <filter string="Product" name="product"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'product'}"/>
+
+                        <filter string="Customer" name="location"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'location'}"/> 
+
+                    </group>                                     
+                </search>
+            </field>
+        </record>
+
+        <record id="view_stock_lost_report_tree" model="ir.ui.view">
+            <field name="name">stock.report.lost.tree</field>
+            <field name="model">stock.report.masuk</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Report" create="false" delete="false">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="laporan_stok_lost_tree">
+            <field name="name">laporan rekap ls absen Perdivisi</field>
+            <field name="model">stock.report.masuk</field>
+            <field name="type">tree</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Laporan Rekap Absen Perdivisi" create="false">
+                    <field name="location"/>
+                    <field name="product"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>  
+
+        <record id="stock_lost" model="ir.actions.act_window">
+            <field name="name">Rekap Absen Perdivisi l</field>
+            <field name="res_model">stock.report.masuk</field>
+            <field name="view_type">form</field>
+            <field name="domain"></field>
+            <field name="view_mode">tree</field>
+        </record> 
+
+        <!--menuitem action="stock_lost" 
+            name="view masuk" 
+            id="cek_stock3" 
+            parent="menu_sales_report_form"
+            sequence="10"/--> 
+
+        <record id="view_stock_final_report_filter" model="ir.ui.view">
+            <field name="name">stock.report.final</field>
+            <field name="model">stock.report.keluar</field>
+            <field name="arch" type="xml">
+                <search string="Search report by">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <group expand="1" string="Group By...">
+    
+                        <filter string="Product" name="product"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'product'}"/>
+
+                        <filter string="Customer" name="location"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'location'}"/> 
+
+                    </group>                                     
+                </search>
+            </field>
+        </record>
+
+        <record id="view_stock_final_report_tree" model="ir.ui.view">
+            <field name="name">stock.report.final.tree</field>
+            <field name="model">stock.report.keluar</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Report">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="laporan_stok_final_tree">
+            <field name="name">laporan rekap ls absenss Perdivisi</field>
+            <field name="model">stock.report.keluar</field>
+            <field name="type">tree</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Laporan Rekap Absen Perdivisi">
+                    <field name="location"/>
+                    <field name="product"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>  
+
+        <record id="stock_final" model="ir.actions.act_window">
+            <field name="name">Rekap Absen Perdivisi l</field>
+            <field name="res_model">stock.report.keluar</field>
+            <field name="view_type">form</field>
+            <field name="domain"></field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+
+        <!--menuitem action="stock_final" 
+            name="view keluar" 
+            id="cek_stock6" 
+            parent="menu_sales_report_form"
+            sequence="10"/--> 
+
+        <record id="view_stock_final1_report_filter" model="ir.ui.view">
+            <field name="name">stock.report.final</field>
+            <field name="model">stock.report.final</field>
+            <field name="arch" type="xml">
+                <search string="Search report by">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <group expand="1" string="Group By...">
+    
+                        <filter string="Product" name="product"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'product'}"/>
+
+                        <filter string="Customer" name="location"
+                             icon="terp-personal" domain="[]" 
+                             context="{'group_by':'location'}"/> 
+
+                    </group>                                     
+                </search>
+            </field>
+        </record>
+
+        <record id="view_stock_final1_report_tree" model="ir.ui.view">
+            <field name="name">stock.report.final.tree</field>
+            <field name="model">stock.report.final</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Report">
+                    <field name="product"/>
+                    <field name="location"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="laporan_stok_final1_tree">
+            <field name="name">laporan rekap ls absenss Perdivisi</field>
+            <field name="model">stock.report.final</field>
+            <field name="type">tree</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Laporan Rekap Absen Perdivisi">
+                    <field name="location"/>
+                    <field name="product"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>  
+
+        <record id="stock_final1" model="ir.actions.act_window">
+            <field name="name">Rekap Absen Perdivisi l</field>
+            <field name="res_model">stock.report.final</field>
+            <field name="view_type">form</field>
+            <field name="domain"></field>
+            <field name="view_mode">tree,form</field>
+        </record> 
+
+        <menuitem action="stock_final1" 
+            name="view final" 
+            id="cek_stock7" 
+            parent="menu_sales_report_form"
+            sequence="10"/> 
+
+
+    </data>
+</openerp>  
